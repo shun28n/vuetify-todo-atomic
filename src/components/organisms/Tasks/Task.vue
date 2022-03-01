@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- タスク１つぶん -->
+    <!-- タスククリックでdoneTask実行
+    task.done:trueでblue 選択で色変えたいときに使用. ripple波紋エフェクト -->
     <v-list-item
       @click="$store.commit('doneTask', task.id)"
       :class="{ 'blue lighten-5': task.done }"
@@ -11,6 +14,7 @@
           <v-checkbox :input-value="task.done" color="primary"></v-checkbox>
         </v-list-item-action>
 
+        <!-- タスク名 -->
         <v-list-item-content>
           <v-list-item-title
             :class="{ 'text-decoration-line-through': task.done }"
@@ -19,17 +23,21 @@
           </v-list-item-title>
         </v-list-item-content>
 
+        <!-- 期日あれば表示 -->
         <v-list-item-action v-if="task.dueDate">
           <v-list-item-action-text>
             <v-icon small>mdi-calendar</v-icon>
+            <!-- task.dueDateを引数としてフィルタniceDate実行 -->
             {{ task.dueDate | niceDate }}
           </v-list-item-action-text>
         </v-list-item-action>
 
+        <!-- タスクメニューにtask情報を渡す -->
         <v-list-item-action>
           <task-menu :task="task" />
         </v-list-item-action>
 
+        <!-- ソートが有効な場合、ソートハンドル表示 -->
         <v-list-item-action v-if="$store.state.sorting">
           <v-btn class="handle" color="primary" icon>
             <v-icon>mdi-drag-horizontal-variant </v-icon>
@@ -37,6 +45,8 @@
         </v-list-item-action>
       </template>
     </v-list-item>
+
+    <!-- タスクごとの区切り -->
     <v-divider></v-divider>
   </div>
 </template>
