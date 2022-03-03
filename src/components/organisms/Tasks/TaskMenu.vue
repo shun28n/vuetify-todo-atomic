@@ -1,12 +1,15 @@
 <template>
   <div>
     <v-menu bottom left>
+      <!-- 親コンポーネントからの情報をv-slotで受けるトリガー用スロット-->
       <template v-slot:activator="{ on, attrs }">
+        <!-- ポップアップを追加したい要素に対しv-on="on"を追加 -->
         <v-btn color="primary" icon v-bind="attrs" v-on="on">
           <v-icon>mdi-dots-vertical</v-icon>
         </v-btn>
       </template>
 
+      <!-- ポップアップの内容 -->
       <v-list>
         <v-list-item
           v-for="(item, index) in items"
@@ -80,6 +83,7 @@ export default {
     ],
   }),
   methods: {
+    //どのメニューのどのclickイベントを呼び出すか
     handleClick(index) {
       this.items[index].click.call(this);
     },

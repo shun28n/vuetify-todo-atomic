@@ -8,13 +8,10 @@
     hide-details
     clearable
   >
+    <!-- v-slot:append 入力フォームと横並びに要素を追加したいときに使用 -->
     <template v-slot:append>
-      <v-icon
-      @click="addTask"
-      color="primary"
-      :disabled="newTaskTitleInvalid"
-      >
-      mdi-plus
+      <v-icon @click="addTask" color="primary" :disabled="newTaskTitleInvalid">
+        mdi-plus
       </v-icon>
     </template>
   </v-text-field>
@@ -27,14 +24,14 @@ export default {
       newTaskTitle: "",
     };
   },
-  computed:{
-    newTaskTitleInvalid(){
-      return !this.newTaskTitle
-    }
+  computed: {
+    newTaskTitleInvalid() {
+      return !this.newTaskTitle;
+    },
   },
   methods: {
     addTask() {
-      if(!this.newTaskTitleInvalid){
+      if (!this.newTaskTitleInvalid) {
         this.$store.dispatch("addTask", this.newTaskTitle);
         this.newTaskTitle = "";
       }
