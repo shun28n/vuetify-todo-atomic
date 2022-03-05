@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  // アプリ全体のデータの状態を管理
   state: {
     appTitle: process.env.VUE_APP_TITLE,
     search: null,
@@ -33,6 +34,7 @@ export default new Vuex.Store({
       text: '',
     },
   },
+  // mutations : stateの更新だけを行う。
   mutations: {
     setSearch(state, value) {
       state.search = value;
@@ -82,6 +84,7 @@ export default new Vuex.Store({
       state.sorting = !state.sorting;
     },
   },
+  // actions:mutationsの呼び出しを行う。非同期API通信も行う。
   actions: {
     addTask({ commit }, newTaskTitle) {
       commit('addTask', newTaskTitle);
@@ -100,6 +103,7 @@ export default new Vuex.Store({
       commit('showSnackbar', '期日が編集されました！');
     },
   },
+  // getters : stateの値を算出したものを返す場合に役立つ。
   getters: {
     tasksFiltered(state) {
       if (!state.search) {
